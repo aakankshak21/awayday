@@ -37,7 +37,7 @@ export function LeaveTypeChart({ data }: LeaveTypeChartProps) {
         <XAxis dataKey="type" tick={{ fontSize: 11, fill: '#6b7280' }} />
         <YAxis tick={{ fontSize: 12, fill: '#6b7280' }} allowDecimals={false} />
         <Tooltip
-          formatter={(value: number, name: string) => [
+          formatter={(value: any, name: any) => [
             name === 'days'
               ? `${value} day${value !== 1 ? 's' : ''}`
               : `${value} request${value !== 1 ? 's' : ''}`,

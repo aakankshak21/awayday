@@ -59,7 +59,7 @@ export function StatusPieChart({ summary }: StatusPieChartProps) {
           ))}
         </Pie>
         <Tooltip
-          formatter={(value: number) => [`${value} request${value !== 1 ? 's' : ''}`, '']}
+          formatter={(value: any) => [`${value} request${value !== 1 ? 's' : ''}`, '']}
         />
         <Legend
           formatter={(value) => <span className="text-sm text-gray-600">{value}</span>}

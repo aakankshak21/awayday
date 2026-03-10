@@ -9,7 +9,8 @@ export function LeavesFilter() {
   const searchParams = useSearchParams()
   const status = searchParams.get('status') || 'all'
 
-  function handleChange(value: string) {
+  function handleChange(value: string | null) {
+    if (!value) return
     const params = new URLSearchParams(searchParams.toString())
     if (value === 'all') {
       params.delete('status')

@@ -38,9 +38,9 @@ export function EmployeeBarChart({ data }: EmployeeBarChartProps) {
         <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#6b7280' }} />
         <YAxis tick={{ fontSize: 12, fill: '#6b7280' }} allowDecimals={false} />
         <Tooltip
-          formatter={(value: number, name: string) => [
+          formatter={(value: any, name: any) => [
             `${value} day${value !== 1 ? 's' : ''}`,
-            name.charAt(0).toUpperCase() + name.slice(1),
+            String(name).charAt(0).toUpperCase() + String(name).slice(1),
           ]}
         />
         <Legend

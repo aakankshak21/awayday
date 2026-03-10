@@ -143,10 +143,10 @@ export function LeaveRequestsTable({ leaves }: LeaveRequestsTableProps) {
 
                 {/* Actions */}
                 <TableCell>
-                  <TooltipProvider delayDuration={100}>
+                  <TooltipProvider>
                     <div className="flex items-center gap-1.5">
                       <Tooltip>
-                        <TooltipTrigger asChild>
+                        <TooltipTrigger>
                           <Button
                             size="sm"
                             variant="outline"
@@ -161,7 +161,7 @@ export function LeaveRequestsTable({ leaves }: LeaveRequestsTableProps) {
                       </Tooltip>
 
                       <Tooltip>
-                        <TooltipTrigger asChild>
+                        <TooltipTrigger>
                           <Button
                             size="sm"
                             variant="outline"
@@ -176,7 +176,7 @@ export function LeaveRequestsTable({ leaves }: LeaveRequestsTableProps) {
                       </Tooltip>
 
                       <Tooltip>
-                        <TooltipTrigger asChild>
+                        <TooltipTrigger>
                           <Button
                             size="sm"
                             variant="outline"

@@ -12,7 +12,8 @@ export function YearFilter() {
 
   const years = [currentYear - 1, currentYear, currentYear + 1].map(String)
 
-  function handleChange(value: string) {
+  function handleChange(value: string | null) {
+    if (!value) return
     const params = new URLSearchParams(searchParams.toString())
     params.set('year', value)
     router.push(`${pathname}?${params.toString()}`)
