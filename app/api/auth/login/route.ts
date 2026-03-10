@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { loginSchema } from '@/lib/validations/auth'
 
 export async function POST(request: Request) {
@@ -20,7 +21,21 @@ export async function POST(request: Request) {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error || !data.session) {
-      return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 })
+      const admin = createAdminClient()
+      const { data: profile } = await admin
+        .from('profiles')
+        .select('id')
+        .eq('email', email)
+        .maybeSingle()
+
+      if (!profile) {
+        return NextResponse.json(
+          { error: 'No account found with this email. Please sign up first.' },
+          { status: 401 }
+        )
+      }
+
+      return NextResponse.json({ error: 'Invalid password. Please try again.' }, { status: 401 })
     }
 
     return NextResponse.json({ success: true })
