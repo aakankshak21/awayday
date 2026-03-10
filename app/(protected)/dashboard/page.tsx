@@ -28,7 +28,7 @@ export default async function DashboardPage() {
   const today = new Date().toISOString().split('T')[0]
 
   const firstName = profile?.full_name?.split(' ')[0] || 'there'
-  const greeting = new Date().getHours() < 12 ? 'Good morning' : new Date().getHours() < 17 ? 'Good afternoon' : 'Good evening'
+  const greeting = 'Hello'
 
   // ── Employee data ────────────────────────────────────────
   const { data: balances } = !isManager
