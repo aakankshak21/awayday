@@ -1,4 +1,4 @@
-import { resend } from './resend'
+import { getResend } from './resend'
 import { LeaveSubmittedEmail } from './templates/leave-submitted'
 import { StatusUpdatedEmail } from './templates/status-updated'
 import { createAdminClient } from '@/lib/supabase/admin'
@@ -18,7 +18,7 @@ export async function sendLeaveSubmittedEmail(params: {
   reason?: string
   leaveRequestId: string
 }) {
-  const { data, error } = await resend.emails.send({
+  const { data, error } = await getResend().emails.send({
     from: `AwayDay <${FROM}>`,
     to: [params.managerEmail],
     subject: `New Leave Request from ${params.employeeName}`,
@@ -58,7 +58,7 @@ export async function sendStatusUpdatedEmail(params: {
 }) {
   const statusLabel = params.status.charAt(0).toUpperCase() + params.status.slice(1)
 
-  const { data, error } = await resend.emails.send({
+  const { data, error } = await getResend().emails.send({
     from: `AwayDay <${FROM}>`,
     to: [params.employeeEmail],
     subject: `Your leave request has been ${statusLabel}`,
