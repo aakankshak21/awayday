@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { SignupForm } from '@/components/auth/SignupForm'
 
 export default function SignupPage() {
@@ -13,7 +14,9 @@ export default function SignupPage() {
           <p className="text-sm text-gray-500 mb-6">
             Use your company email to get started
           </p>
-          <SignupForm />
+          <Suspense>
+            <SignupForm />
+          </Suspense>
         </div>
       </div>
     </div>

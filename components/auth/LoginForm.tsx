@@ -31,9 +31,20 @@ export function LoginForm() {
     setLoading(true)
     try {
       const supabase = createClient()
-      const { error } = await supabase.auth.signInWithPassword(values)
-      if (error) {
-        setError('Invalid email or password')
+      const { error: signInError } = await supabase.auth.signInWithPassword(values)
+      if (signInError) {
+        // Check if the email exists in profiles
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('id')
+          .eq('email', values.email)
+          .maybeSingle()
+
+        if (!profile) {
+          router.push('/signup?message=No account found. Please sign up to continue.')
+          return
+        }
+        setError('Invalid password. Please try again.')
         return
       }
       window.location.href = '/dashboard'

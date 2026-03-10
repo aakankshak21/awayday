@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { UserRound, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -29,6 +29,8 @@ const ROLES: { value: Role; label: string; description: string; icon: typeof Use
 
 export function SignupForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectMessage = searchParams.get('message')
   const [role, setRole] = useState<Role>('employee')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -68,6 +70,11 @@ export function SignupForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {redirectMessage && (
+        <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+          {redirectMessage}
+        </p>
+      )}
       {/* Role selector */}
       <div className="grid grid-cols-2 gap-3">
         {ROLES.map(({ value, label, description, icon: Icon }) => {
