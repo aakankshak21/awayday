@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { CalendarPlus } from 'lucide-react'
@@ -59,7 +60,7 @@ export default async function MyLeavesPage({ searchParams }: PageProps) {
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <p className="text-sm font-medium text-gray-700">Leave History</p>
-          <LeavesFilter />
+          <Suspense><LeavesFilter /></Suspense>
         </div>
         <div className="p-1">
           <LeavesTable leaves={typedLeaves} />

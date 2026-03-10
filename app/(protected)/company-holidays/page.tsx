@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { HolidaysTable } from '@/components/holidays/HolidaysTable'
@@ -49,7 +50,7 @@ export default async function CompanyHolidaysPage({ searchParams }: PageProps) {
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <p className="text-sm font-medium text-gray-700">Holiday Calendar</p>
-          <YearFilter />
+          <Suspense><YearFilter /></Suspense>
         </div>
         <div className="p-1">
           <HolidaysTable
