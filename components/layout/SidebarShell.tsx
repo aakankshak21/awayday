@@ -53,7 +53,7 @@ export function SidebarShell({ role, fullName, email, children }: SidebarShellPr
           >
             <Menu className="h-5 w-5" />
           </button>
-          <span className="text-base font-bold text-gray-900">AwayDay</span>
+          <span className="text-base font-bold text-gray-900 cursor-pointer" onClick={() => window.location.reload()}>AwayDay</span>
         </header>
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8">

@@ -68,7 +68,7 @@ export function Sidebar({ role, fullName, email, collapsed, onToggle, mobileOpen
       )}>
         {/* Logo — always show on mobile drawer; hide on desktop when collapsed */}
         <div className={cn(collapsed ? 'lg:hidden' : '')}>
-          <h1 className="text-xl font-bold text-gray-900">AwayDay</h1>
+          <h1 className="text-xl font-bold text-gray-900 cursor-pointer" onClick={() => window.location.reload()}>AwayDay</h1>
           <p className="text-xs text-gray-400">Leave Management</p>
         </div>
 
