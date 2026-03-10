@@ -50,7 +50,10 @@ export default async function TeamPage() {
     .lte('start_date', `${year}-12-31`)
     .eq('status', 'approved')
 
-  const onLeaveTodayCount = onLeaveToday?.length ?? 0
+  const onLeaveTodayList = (onLeaveToday ?? []) as any[]
+  const upcomingLeavesList = (upcomingLeaves ?? []) as any[]
+  const employeesList = (employees ?? []) as any[]
+  const onLeaveTodayCount = onLeaveTodayList.length
 
   function getInitials(name: string | null | undefined) {
     if (!name) return '?'
@@ -87,7 +90,7 @@ export default async function TeamPage() {
           <p className="text-sm text-gray-400">No employees on leave today</p>
         ) : (
           <div className="space-y-3">
-            {onLeaveToday?.map((leave) => {
+            {onLeaveTodayList.map((leave) => {
               const p = leave.profiles
               return (
                 <div key={leave.id} className="flex items-center gap-3">
@@ -121,7 +124,7 @@ export default async function TeamPage() {
           <h2 className="text-base font-semibold text-gray-900">Upcoming Leaves (Next 14 Days)</h2>
         </div>
 
-        {!upcomingLeaves || upcomingLeaves.length === 0 ? (
+        {upcomingLeavesList.length === 0 ? (
           <p className="text-sm text-gray-400 px-5 pb-5">No upcoming leaves in the next 14 days</p>
         ) : (
           <div className="overflow-x-auto">
@@ -136,7 +139,7 @@ export default async function TeamPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {upcomingLeaves.map((leave) => {
+                {upcomingLeavesList.map((leave) => {
                   const p = leave.profiles
                   return (
                     <tr key={leave.id}>
@@ -178,7 +181,7 @@ export default async function TeamPage() {
           <h2 className="text-base font-semibold text-gray-900">All Employees</h2>
         </div>
 
-        {!employees || employees.length === 0 ? (
+        {employeesList.length === 0 ? (
           <p className="text-sm text-gray-400 px-5 pb-5">No employees found</p>
         ) : (
           <div className="overflow-x-auto">
@@ -191,7 +194,7 @@ export default async function TeamPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {employees.map((emp) => {
+                {employeesList.map((emp) => {
                   const daysUsed = getDaysUsed(emp.id)
                   const pct = Math.min(100, Math.round((daysUsed / 30) * 100))
                   return (
