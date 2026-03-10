@@ -30,10 +30,11 @@ export default async function MyLeavesPage({ searchParams }: PageProps) {
 
   const { data: leaves } = await query
 
+  const typedLeaves = (leaves ?? []) as LeaveRequest[]
   const counts = {
-    total: leaves?.length ?? 0,
-    pending: leaves?.filter(l => l.status === 'pending').length ?? 0,
-    approved: leaves?.filter(l => l.status === 'approved').length ?? 0,
+    total: typedLeaves.length,
+    pending: typedLeaves.filter(l => l.status === 'pending').length,
+    approved: typedLeaves.filter(l => l.status === 'approved').length,
   }
 
   return (
@@ -61,7 +62,7 @@ export default async function MyLeavesPage({ searchParams }: PageProps) {
           <LeavesFilter />
         </div>
         <div className="p-1">
-          <LeavesTable leaves={(leaves ?? []) as LeaveRequest[]} />
+          <LeavesTable leaves={typedLeaves} />
         </div>
       </div>
     </div>
