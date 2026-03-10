@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { format } from 'date-fns'
-import { CheckCircle, XCircle, AlertCircle } from 'lucide-react'
+import { CheckCircle, XCircle, AlertCircle, RefreshCw } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -82,7 +82,10 @@ export function PendingApprovals({ leaves }: PendingApprovalsProps) {
                       {leave.profiles?.full_name?.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-800">{leave.profiles?.full_name}</p>
+                      <p
+                        className="text-sm font-medium text-gray-800 hover:text-blue-600 cursor-pointer"
+                        onClick={() => router.push('/leave-requests')}
+                      >{leave.profiles?.full_name}</p>
                       <p className="text-xs text-gray-400">
                         {LEAVE_TYPE_LABELS[leave.leave_type as LeaveType]} ·{' '}
                         {format(new Date(leave.start_date), 'MMM d')} – {format(new Date(leave.end_date), 'MMM d')} ·{' '}
@@ -113,6 +116,16 @@ export function PendingApprovals({ leaves }: PendingApprovalsProps) {
                     >
                       <XCircle className="h-3.5 w-3.5 mr-1" />
                       Reject
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-blue-600 border-blue-200 hover:bg-blue-50 hover:text-blue-700 h-8"
+                      disabled={loading === leave.id}
+                      onClick={() => updateStatus(leave.id, 'compensated')}
+                    >
+                      <RefreshCw className="h-3.5 w-3.5 mr-1" />
+                      Compensate
                     </Button>
                   </div>
                 </div>
